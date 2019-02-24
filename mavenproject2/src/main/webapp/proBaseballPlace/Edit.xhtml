@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProBaseballPlaceEditDlg" widgetVar="ProBaseballPlaceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProBaseballPlaceTitle}">
+            <h:form id="ProBaseballPlaceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proBaseballPlaceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProBaseballPlaceLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{proBaseballPlaceController.selected.id}" title="#{bundle.EditProBaseballPlaceTitle_id}" required="true" requiredMessage="#{bundle.EditProBaseballPlaceRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditProBaseballPlaceLabel_placeName}" for="placeName" />
+                        <p:inputText id="placeName" value="#{proBaseballPlaceController.selected.placeName}" title="#{bundle.EditProBaseballPlaceTitle_placeName}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proBaseballPlaceController.update}" value="#{bundle.Save}" update="display,:ProBaseballPlaceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProBaseballPlaceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProBaseballPlaceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

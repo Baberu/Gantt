@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProBaseballTaskViewDlg" widgetVar="ProBaseballTaskViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewProBaseballTaskTitle}">
+            <h:form id="ProBaseballTaskViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proBaseballTaskController.selected != null}">
+                        <h:outputText value="#{bundle.ViewProBaseballTaskLabel_id}"/>
+                        <h:outputText value="#{proBaseballTaskController.selected.id}" title="#{bundle.ViewProBaseballTaskTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewProBaseballTaskLabel_startDatetime}"/>
+                        <h:outputText value="#{proBaseballTaskController.selected.startDatetime}" title="#{bundle.ViewProBaseballTaskTitle_startDatetime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewProBaseballTaskLabel_remarks}"/>
+                        <h:outputText value="#{proBaseballTaskController.selected.remarks}" title="#{bundle.ViewProBaseballTaskTitle_remarks}"/>
+                        <h:outputText value="#{bundle.ViewProBaseballTaskLabel_proBaseballPlaceId}"/>
+                        <h:outputText value="#{proBaseballTaskController.selected.proBaseballPlaceId}" title="#{bundle.ViewProBaseballTaskTitle_proBaseballPlaceId}"/>
+                        <h:outputText value="#{bundle.ViewProBaseballTaskLabel_proBaseballHomeTeamId}"/>
+                        <h:outputText value="#{proBaseballTaskController.selected.proBaseballHomeTeamId}" title="#{bundle.ViewProBaseballTaskTitle_proBaseballHomeTeamId}"/>
+                        <h:outputText value="#{bundle.ViewProBaseballTaskLabel_proBaseballAwayTeamId}"/>
+                        <h:outputText value="#{proBaseballTaskController.selected.proBaseballAwayTeamId}" title="#{bundle.ViewProBaseballTaskTitle_proBaseballAwayTeamId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ProBaseballTaskViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

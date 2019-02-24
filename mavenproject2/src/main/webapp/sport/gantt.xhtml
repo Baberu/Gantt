@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputScript library="js" name="gantt/codebase/dhtmlxgantt.js" />
+        <h:outputScript library="js" name="gantt/codebase/locale/locale_jp.js" />
+        <h:outputStylesheet library="css" name="dhtmlxgantt_meadow.css" />
+    </h:head>
+    <h:body>
+        <p:panel id="basic" header="日程">
+        <div id="gantt_here" style='width:100%; height:500px;'></div>
+        </p:panel>
+        <script type="text/javascript">
+        //<![CDATA[
+        /*
+        @license
+
+        dhtmlxGantt v.6.1.0 Standard
+        This software is covered by GPL license. You also can obtain Commercial or Enterprise license to use it in non-GPL project - please contact sales@dhtmlx.com. Usage without proper license is prohibited.
+
+        (c) Dinamenta, UAB.
+
+        */
+        // コラム設定
+        gantt.config.columns = [
+             {name:"text",       label:"対戦",  width:"*", tree:true, width:150 },
+             {name:"start_date", label:"開始日", align:"center", width:120 },
+             {name:"place", label:"場所", align:"left" , width:210 }
+         ];
+         // link無効
+        gantt.config.drag_links = false;
+        // progress無効
+        gantt.config.show_progress = false;
+        // 一試合の期間を3時間に設定
+        gantt.config.duration_unit = "hour";//an hour
+        gantt.config.duration_step = 3; 
+        gantt.config.date_scale = "%M%d日";
+        gantt.config.scale_height = 50;
+        gantt.config.subscales = [
+            {unit:"hour", step:1, date:"%H:00" }
+          ];
+
+        var tasks = #{proBaseballTaskController.createGanttData()};
+        gantt.init("gantt_here");
+        gantt.parse(tasks);
+
+        //]]>
+        </script>
+    </h:body>
+</html>
+

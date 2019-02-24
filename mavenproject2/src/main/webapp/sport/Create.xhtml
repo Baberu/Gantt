@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SportCreateDlg" widgetVar="SportCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSportTitle}">
+            <h:form id="SportCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sportController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSportLabel_idsport}" for="idsport" />
+                        <p:inputText id="idsport" value="#{sportController.selected.idsport}" title="#{bundle.CreateSportTitle_idsport}" required="true" requiredMessage="#{bundle.CreateSportRequiredMessage_idsport}"/>
+                        <p:outputLabel value="#{bundle.CreateSportLabel_sportName}" for="sportName" />
+                        <p:inputText id="sportName" value="#{sportController.selected.sportName}" title="#{bundle.CreateSportTitle_sportName}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sportController.create}" value="#{bundle.Save}" update="display,:SportListForm:datalist,:growl" oncomplete="handleSubmit(args,'SportCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SportCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

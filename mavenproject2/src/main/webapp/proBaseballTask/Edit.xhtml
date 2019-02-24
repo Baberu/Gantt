@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProBaseballTaskEditDlg" widgetVar="ProBaseballTaskEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditProBaseballTaskTitle}">
+            <h:form id="ProBaseballTaskEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{proBaseballTaskController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditProBaseballTaskLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{proBaseballTaskController.selected.id}" title="#{bundle.EditProBaseballTaskTitle_id}" required="true" requiredMessage="#{bundle.EditProBaseballTaskRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditProBaseballTaskLabel_startDatetime}" for="startDatetime" />
+                        <p:calendar id="startDatetime" pattern="MM/dd/yyyy HH:mm:ss" value="#{proBaseballTaskController.selected.startDatetime}" title="#{bundle.EditProBaseballTaskTitle_startDatetime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditProBaseballTaskLabel_remarks}" for="remarks" />
+                        <p:inputText id="remarks" value="#{proBaseballTaskController.selected.remarks}" title="#{bundle.EditProBaseballTaskTitle_remarks}" />
+                        <p:outputLabel value="#{bundle.EditProBaseballTaskLabel_proBaseballPlaceId}" for="proBaseballPlaceId" />
+                        <p:selectOneMenu id="proBaseballPlaceId" value="#{proBaseballTaskController.selected.proBaseballPlaceId}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{proBaseballPlaceController.itemsAvailableSelectOne}"
+                                           var="proBaseballPlaceIdItem"
+                                           itemValue="#{proBaseballPlaceIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditProBaseballTaskLabel_proBaseballHomeTeamId}" for="proBaseballHomeTeamId" />
+                        <p:selectOneMenu id="proBaseballHomeTeamId" value="#{proBaseballTaskController.selected.proBaseballHomeTeamId}" required="true" requiredMessage="#{bundle.EditProBaseballTaskRequiredMessage_proBaseballHomeTeamId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{proBaseballTeamController.itemsAvailableSelectOne}"
+                                           var="proBaseballHomeTeamIdItem"
+                                           itemValue="#{proBaseballHomeTeamIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditProBaseballTaskLabel_proBaseballAwayTeamId}" for="proBaseballAwayTeamId" />
+                        <p:selectOneMenu id="proBaseballAwayTeamId" value="#{proBaseballTaskController.selected.proBaseballAwayTeamId}" required="true" requiredMessage="#{bundle.EditProBaseballTaskRequiredMessage_proBaseballAwayTeamId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{proBaseballTeamController.itemsAvailableSelectOne}"
+                                           var="proBaseballAwayTeamIdItem"
+                                           itemValue="#{proBaseballAwayTeamIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proBaseballTaskController.update}" value="#{bundle.Save}" update="display,:ProBaseballTaskListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ProBaseballTaskEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ProBaseballTaskEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
